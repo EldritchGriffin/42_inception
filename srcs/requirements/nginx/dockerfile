@@ -7,3 +7,5 @@ RUN apt-get update && apt-get upgrade -y && \
     vim
 
 # COPY ./conf/nginx.conf /etc/nginx/nginx.conf
+
+CMD ["nginx", "-g", "daemon off;"]

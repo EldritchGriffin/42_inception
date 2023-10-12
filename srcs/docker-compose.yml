@@ -1,8 +1,10 @@
 version: "3.3"
 services:
   nginx:
-    build: srcs/requirements/nginx/dockerfile
-    image: nginx
+    build: ./requirements/nginx
     container_name: nginx
     ports:
       - "443:443"
+  # mariadb:
+  
+  # wordpress:
