@@ -6,4 +6,5 @@ start:
 clean:
 	@cd ./srcs && \
 	docker compose down && \
-	docker system prune -f
+	docker system prune -a -f
+re: clean all
