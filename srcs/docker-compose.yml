@@ -2,6 +2,7 @@ version: "3.9"
 
 services:
   nginx:
+    container_name: nginx
     build: ./requirements/nginx
     ports:
       - "443:443"
@@ -11,9 +12,11 @@ services:
       - my_network
     depends_on:
       - wordpress
+    restart: always
 
 
   wordpress:
+    container_name: wordpress
     build: ./requirements/wordpress
     env_file:
       - .env
@@ -25,20 +28,24 @@ services:
       - my_network
     depends_on:
       - mariadb
+    restart: always
 
 
   mariadb:
+    container_name: mariadb
     build: ./requirements/mariadb
     env_file:
       - .env
+    ports:
+      - "3306:3306"
     volumes:
       - mdb_vol:/var/lib/mysql
     networks:
       - my_network
+    restart: always
 
 networks:
   my_network:
-    driver: bridge
 
 volumes:
   wp_vol:
@@ -46,12 +53,12 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: ./requirements/volumes/wp_vol
+      device: /Users/aelyakou/Desktop/data/wp_vol
       o: bind
   mdb_vol:
     name: mdb_vol
     driver: local
     driver_opts:
       type: none
-      device: ./requirements/volumes/mdb_vol
+      device: /Users/aelyakou/Desktop/data/mdb_vol
       o: bind

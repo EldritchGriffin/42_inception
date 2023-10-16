@@ -1,19 +1,24 @@
 #!/bin/bash
 
+# Check if MariaDB service is already running
 service mariadb start
 
-echo    "CREATE DATABASE IF NOT EXISTS $DB_NAME;" | mysql -u root
 
-echo    "CREATE USER IF NOT EXISTS '$DB_USER'@'%' IDENTIFIED BY '$DB_PASSWORD';" | mysql -u root
+# Create a temporary SQL file
+SQL_FILE="/tmp/wordpress.sql"
 
-echo    "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'%' " | mysql -u root
+# Create SQL queries in the file
+cat <<EOF > "$SQL_FILE"
+CREATE DATABASE IF NOT EXISTS $DB_NAME;
+CREATE USER IF NOT EXISTS $DB_USER@'%' IDENTIFIED BY '$DB_PASSWORD';
+GRANT ALL PRIVILEGES ON $DB_NAME.* TO $DB_USER@'%';
+FLUSH PRIVILEGES;
+EOF
 
-echo    "FLUSH PRIVILEGES;" | mysql -u root
+# Execute the SQL commands using the mysql client
+mysql < "$SQL_FILE"
+rm "$SQL_FILE"
 
-echo    "ALTER USER 'root'@'localhost' IDENTIFIED BY '$DB_ROOTPWD';" | mysql -u root
+service mariadb stop
 
 mysqld
-
-
-
-# xinit startx openbox chrome 
