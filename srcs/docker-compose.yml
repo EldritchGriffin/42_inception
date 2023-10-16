@@ -1,42 +1,57 @@
-version: "3.3"
+version: "3.9"
+
 services:
   nginx:
     build: ./requirements/nginx
-    container_name: nginx
     ports:
       - "443:443"
+    volumes:
+      - wp_vol:/var/www/html
+    networks:
+      - my_network
     depends_on:
       - wordpress
-    volumes:
-      - ./requirements/volumes/wp_vol:/var/www/html
-    networks:
-      - my_network
-  mariadb:
-    build: ./requirements/mariadb
-    container_name: mariadb
-    env_file: .env
-    restart: always
-    ports:
-      - 3306:3306
-    networks:
-      - my_network
-    volumes:
-      - ./requirements/volumes/mdb_vol:/var/lib/mysql
-  
+
+
   wordpress:
     build: ./requirements/wordpress
-    container_name: wordpress
     env_file:
       - .env
     ports:
       - "9000:9000"
     volumes:
-      - ./requirements/volumes/wp_vol:/var/www/html
+      - wp_vol:/var/www/html
     networks:
       - my_network
     depends_on:
       - mariadb
 
+
+  mariadb:
+    build: ./requirements/mariadb
+    env_file:
+      - .env
+    volumes:
+      - mdb_vol:/var/lib/mysql
+    networks:
+      - my_network
+
 networks:
   my_network:
     driver: bridge
+
+volumes:
+  wp_vol:
+    name: wp_vol
+    driver: local
+    driver_opts:
+      type: none
+      device: ./requirements/volumes/wp_vol
+      o: bind
+  mdb_vol:
+    name: mdb_vol
+    driver: local
+    driver_opts:
+      type: none
+      device: ./requirements/volumes/mdb_vol
+      o: bind
