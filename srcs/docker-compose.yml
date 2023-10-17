@@ -44,6 +44,15 @@ services:
       - my_network
     restart: always
 
+
+  website:
+    container_name: website
+    build: ./requirements/bonus/static_site
+    ports:
+      - "2002:2002"
+    restart: always
+
+
 networks:
   my_network:
 
