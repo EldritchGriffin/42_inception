@@ -163,54 +163,7 @@ body{
   }
 }
 
-.button {
-  height: auto;
-  background: transparent;
-  padding: 0;
-  border: none;
-}
 
-/* button styling */
-.button {
-  position: absolute;
-  --border-right: 6px;
-  --text-stroke-color: rgba(230, 205, 255, 0.628);
-  --animation-color: #8806df;
-  --fs-size: 2em;
-  letter-spacing: 3px;
-  text-decoration: none;
-  font-size: var(--fs-size);
-  font-family: "Arial";
-  /* position: relative; */
-  text-transform: uppercase;
-  color: transparent;
-  -webkit-text-stroke: 1px var(--text-stroke-color);
-}
-/* this is the text, when you hover on button */
-.hover-text {
-  justify-content: center;
-  position: absolute;
-  /* box-sizing: border-box; */
-  content: attr(data-text);
-  color: var(--animation-color);
-  width: 0%;
-  inset: 0;
-  border-right: var(--border-right) solid var(--animation-color);
-  overflow: hidden;
-  transition: 1s;
-  -webkit-text-stroke: 1px var(--animation-color);
-}
-/* hover */
-.button:hover .hover-text {
-  width: 100%;
-  filter: drop-shadow(0 0 23px var(--animation-color))
-}
-.title {
-  position: absolute;
-  top: 40%;
-  left: 43%;
-  transform: translate(50%, 50%);
-}
 .github_button {
   position: absolute;
   top: 50%;
@@ -225,12 +178,6 @@ body{
     <title>EldritchGriffin</title>
 </head>
 <body>
-  <div class="title">
-    <button class="button" data-text="Awesome">
-      <span class="actual-text">&nbsp;Eldritch_Griffin&nbsp;</span>
-      <span aria-hidden="true" class="hover-text">&nbsp;Eldritch_Griffin&nbsp;</span>
-  </button>
-  </div>
   <div class="github_button">
     <a href="https://github.com/EldritchGriffin">
       <button class="ui-btn">
