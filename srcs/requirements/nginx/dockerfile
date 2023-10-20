@@ -4,8 +4,7 @@ RUN apt-get update -y && \
     apt-get install -y \
     nginx \
     openssl \
-    vim \
-    php7.4-fpm
+    vim
 
 RUN mkdir -p /etc/nginx/ssl && \
     openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
