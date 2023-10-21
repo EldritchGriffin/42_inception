@@ -62,12 +62,12 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /Users/aelyakou/Desktop/data/wp_vol
+      device: /home/aelyakou/data/wp_vol
       o: bind
   mdb_vol:
     name: mdb_vol
     driver: local
     driver_opts:
       type: none
-      device: /Users/aelyakou/Desktop/data/mdb_vol
+      device: /home/aelyakou/data/mdb_vol
       o: bind

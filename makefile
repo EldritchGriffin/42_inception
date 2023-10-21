@@ -1,17 +1,17 @@
 all: start
 
 start:
-	@mkdir -p /Users/aelyakou/Desktop/data
-	@mkdir -p /Users/aelyakou/Desktop/data/wp_vol
-	@mkdir -p /Users/aelyakou/Desktop/data/mdb_vol
+	@mkdir -p /home/aelyakou/data
+	@mkdir -p /home/aelyakou/data/wp_vol
+	@mkdir -p /home/aelyakou/data/mdb_vol
 	@cd ./srcs && docker-compose up -d
 
 stop:
 	cd ./srcs && docker-compose down
 clean: stop
-	docker rmi -f srcs-mariadb srcs-wordpress srcs-nginx srcs-website
+	docker rmi -f srcs_mariadb srcs_wordpress srcs_nginx srcs_website
 fclean: clean
-	@rm -rf /Users/aelyakou/Desktop/data
+	@rm -rf /home/aelyakou/data
 	docker volume rm -f wp_vol mdb_vol
 	docker system prune -af
 
